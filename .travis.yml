@@ -1,0 +1,6 @@
+language: go
+
+go:
+  - master
+
+script: go get github.com/manifoldco/promptui && go test -v
