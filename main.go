@@ -6,6 +6,7 @@ import (
 	"github.com/manifoldco/promptui"
 )
 
+// Initialize survey totals for all 5 categories
 var totals = map[string]int{
 	"Absence of Trust":            0,
 	"Fear of Conflict":            0,
@@ -14,11 +15,13 @@ var totals = map[string]int{
 	"Inattention to Results":      0,
 }
 
+// Runs the main prompt for the team health survey
 func main() {
 	fmt.Println("-------------------------------------------------")
 	fmt.Println("Welcome to the Nic Cage Team Survey")
 	fmt.Println("-------------------------------------------------")
 
+	// Slice of all the questions in the survey
 	label := []string{
 		"1. Team members are passionate and unguarded in their discussion of issues",
 		"2. Team members call out one another’s deficiencies or unproductive behaviors",
@@ -37,6 +40,7 @@ func main() {
 		"15. Team members are slow to seek credit for their own contributions, but quick to point out those of others",
 	}
 
+	// Iterates over questions and prompts user for scale
 	for i := 1; i <= len(label); i++ {
 		prompt := promptui.Select{
 			Label: label[i-1],
@@ -73,6 +77,7 @@ func main() {
 	 	because without it, even the best ones deviate toward dysfunction.`)
 }
 
+// Checks the results from the user input and adds the score accordingly
 func resultChecker(result string, category string) {
 
 	switch {
@@ -80,11 +85,13 @@ func resultChecker(result string, category string) {
 		totals[category] += 3
 	case result == "Sometimes":
 		totals[category] += 2
-	default:
+	case result == "Rarely":
 		totals[category]++
 	}
 }
 
+// Getter for the question category which is abstracted to the user
+// TODO There must be a better way to accomplish this behavior
 func categoryGetter(questionNum int) string {
 	fmt.Println(questionNum)
 	switch {
