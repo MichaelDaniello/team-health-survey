@@ -53,7 +53,7 @@ func TestResultChecker(t *testing.T) {
 
 func Test_main(t *testing.T) {
 	main()
-	if totals["Avoidance of Accountability"] != 3 {
-
+	if totals["Absence of Trust"] != 2 {
+		t.Error("Result checker failed, got:", totals["Absence of Trust"], "want: 2")
 	}
 }
