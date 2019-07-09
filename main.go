@@ -21,6 +21,31 @@ func main() {
 	fmt.Println("Welcome to the Nic Cage Team Survey")
 	fmt.Println("-------------------------------------------------")
 
+	startSurvey()
+
+	fmt.Println(
+		"Your score for Absence of Trust is",
+		totals["Absence of Trust"],
+		"\nYour score for Fear of Conflict is",
+		totals["Fear of Conflict"],
+		"\nYour score for Lack of Commitment is",
+		totals["Lack of Commitment"],
+		"\nYour score for Avoidance of Accountability is",
+		totals["Avoidance of Accountability"],
+		"\nYour score for Inattention to Results is",
+		totals["Inattention to Results"],
+	)
+	fmt.Println(
+		"-------------------------------------------------",
+		"A score of 3 to 5 is probably an indication that the dysfunction needs to be addressed.",
+		"A score of 6 or 7 indicates that the dysfunction could be a problem.",
+		"A score of 8 or 9 is a probable indication that the dysfunction is not a problem for your team.",
+		"-------------------------------------------------\n",
+		`Reguardless of your scores, it is important to keep in mind that every team needs constant work,
+	 	because without it, even the best ones deviate toward dysfunction.`)
+}
+
+func startSurvey() {
 	// Slice of all the questions in the survey
 	label := []string{
 		"1. Team members are passionate and unguarded in their discussion of issues",
@@ -55,26 +80,6 @@ func main() {
 		}
 		resultChecker(result, categoryGetter(i))
 	}
-	fmt.Println(
-		"Your score for Absence of Trust is",
-		totals["Absence of Trust"],
-		"\nYour score for Fear of Conflict is",
-		totals["Fear of Conflict"],
-		"\nYour score for Lack of Commitment is",
-		totals["Lack of Commitment"],
-		"\nYour score for Avoidance of Accountability is",
-		totals["Avoidance of Accountability"],
-		"\nYour score for Inattention to Results is",
-		totals["Inattention to Results"],
-	)
-	fmt.Println(
-		"-------------------------------------------------",
-		"A score of 3 to 5 is probably an indication that the dysfunction needs to be addressed.",
-		"A score of 6 or 7 indicates that the dysfunction could be a problem.",
-		"A score of 8 or 9 is a probable indication that the dysfunction is not a problem for your team.",
-		"-------------------------------------------------\n",
-		`Reguardless of your scores, it is important to keep in mind that every team needs constant work,
-	 	because without it, even the best ones deviate toward dysfunction.`)
 }
 
 // Checks the results from the user input and adds the score accordingly
@@ -93,7 +98,6 @@ func resultChecker(result string, category string) {
 // Getter for the question category which is abstracted to the user
 // TODO There must be a better way to accomplish this behavior
 func categoryGetter(questionNum int) string {
-	fmt.Println(questionNum)
 	switch {
 	case questionNum == 4:
 		return "Absence of Trust"
@@ -125,7 +129,8 @@ func categoryGetter(questionNum int) string {
 		return "Inattention to Results"
 	case questionNum == 15:
 		return "Inattention to Results"
+	default:
+		return "Invalid queston number"
 	}
-	return ""
 
 }
