@@ -1,10 +1,7 @@
 package main
 
 import (
-	"fmt"
 	"testing"
-
-	"github.com/manifoldco/promptui"
 )
 
 type categoryTest struct {
@@ -33,9 +30,8 @@ func TestCategoryGetter(t *testing.T) {
 func TestCategoryGetterFail(t *testing.T) {
 	qnum := 16
 	result := categoryGetter(qnum)
-	if categoryGetter(22) == "Invalid queston number" {
+	if categoryGetter(22) != "Invalid queston number" {
 		t.Errorf("categoryGetter(%d): want: Invalid queston number got %v", qnum, result)
-		t.Fail()
 	}
 }
 
@@ -53,24 +49,6 @@ func TestResultChecker(t *testing.T) {
 	if totals["Avoidance of Accountability"] != 1 {
 		t.Error("Result checker failed, got:", totals["Avoidance of Accountability"], "want: 1")
 	}
-}
-
-func TestPrompt(t *testing.T) {
-	prompt := promptui.Select{
-		Label: "Select Day",
-		Items: []string{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday",
-			"Saturday", "Sunday"},
-	}
-
-	_, result, err := prompt.Run()
-
-	if err != nil {
-		t.Errorf("Prompt failed %v\n", err)
-		return
-	}
-
-	fmt.Printf("You choose %q\n", result)
-
 }
 
 func Test_main(t *testing.T) {
